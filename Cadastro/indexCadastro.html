@@ -7,18 +7,38 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <section>
-        <h1>Cadastro</h1>
-    </section>
-    <div>
-        <h2>Insira seus Dados</h2>
-        <hr>
-        <h3>Nome(completo)</h3>
-        <input type="text">
-        <h3>E-mail</h3>
-        <input type="text">
-        <h3>Número de Telefone</h3>
-        <input type="text">
+    <dialog id="signup">
+        <div>
+            <h2>Insira seus Dados</h2>
+            <hr>
+            <h3>Nome de Usuário</h3>
+            <input type="text">
+            <h3>E-mail</h3>
+            <input type="text">
+            <h3>Número de Telefone</h3>
+            <input type="text">
+            <h3>Insira sua Senha</h3>
+            <input type="text">
+            <h3>Confirme sua Senha</h3>
+            <input type="text">
+        </div>
+    <button onclick="signup.close()">FECHAR</button>
+    </dialog>
+    <dialog id="login">
+
+        <div>
+            <h3>Nome de Usuário:</h3>
+            <input type="text">
+            <h3>Senha:</h3>
+            <input type="text">
+        </div>    
+        <button onclick="login.close()">FECHAR</button>
+    </dialog>
+    <div id="div-login">
+        <h1>WIP Imports</h1>
+    
+    <button onclick="signup.showModal()">CADASTRAR-SE</button>
+    <button onclick="login.showModal()">ENTRAR</button>
     </div>
     <script src="cadastroUser.js"></script>
 </body>
