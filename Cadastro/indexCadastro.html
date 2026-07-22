@@ -12,31 +12,36 @@
             <h2>Insira seus Dados</h2>
             <hr>
             <h3>Nome de Usuário</h3>
-            <input type="text">
+            <input id="input-novoUsuario" type="text">
             <h3>E-mail</h3>
-            <input type="text">
+            <input id="input-email" type="text">
             <h3>Número de Telefone</h3>
-            <input type="text">
+            <input id="input-telefone" type="text">
             <h3>Insira sua Senha</h3>
-            <input type="text">
+            <input id="input-novaSenha" type="text">
             <h3>Confirme sua Senha</h3>
-            <input type="text">
+            <input id="input-confirmSenha" type="text">
         </div>
+    <button onclick="cadastrar(), signup.close()" >CADASTRAR</button>
     <button onclick="signup.close()">FECHAR</button>
+
     </dialog>
+    
     <dialog id="login">
 
         <div>
             <h3>Nome de Usuário:</h3>
-            <input type="text">
+            <input id="input-usuario" type="text">
             <h3>Senha:</h3>
-            <input type="text">
+            <input id="input-senha" type="text">
         </div>    
         <button onclick="login.close()">FECHAR</button>
     </dialog>
+    <section>
+        <h1>WP Imports</h1>
+    </section>
     <div id="div-login">
-        <h1>WIP Imports</h1>
-    
+    <h2>Seja Bem Vindo!</h2>
     <button onclick="signup.showModal()">CADASTRAR-SE</button>
     <button onclick="login.showModal()">ENTRAR</button>
     </div>
