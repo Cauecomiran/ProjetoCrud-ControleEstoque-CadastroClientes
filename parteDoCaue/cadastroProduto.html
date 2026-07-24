@@ -47,7 +47,7 @@
     <input placeholder="buscar produtos..." id="buscar-produtos" type="text">
 
     <div id="remover-adicionar">
-        <button>➕</button>
+        <button onclick="cadastrarProdutos()">➕</button>
         <button >🗑️</button> 
     </div>
 
@@ -63,12 +63,68 @@
         </select>
     </div>
 
-    <div id="produtos">produtos</div>
+    <div id="produtos">
+
+        <div id="container-produto">
+
+
+
+        </div>
+        
+    </div>
 
 </div>
 
 
+<dialog id="cadastro-produto-modal">
 
+    
+    <div id="dialog-input-container">
+        <div>
+            <label for="input-nome">Nome:</label>
+            <input type="text" id="input-nome">    
+        </div>
+
+        <div>
+            <label for="input-tamanho">Tamanho:</label>
+            <input type="text" id="input-tamanho">
+        </div>
+
+        <div>
+            <label for="input-custo">Custo:</label>
+            <input type="text" id="input-custo">
+        </div>
+
+        <div>
+            <label for="input-valor-atacado">Valor atacado:</label>
+            <input type="text" id="input-valor-atacado">
+        </div>
+
+        <div>
+            <label for="input-valor-varejo">Valor varejo:</label>
+            <input type="text" id="input-valor-varejo">
+        </div>
+
+        <div>
+            <label for="input-id">ID:</label>
+            <input type="text" id="input-id" readonly placeholder="id:123456">
+        </div>
+
+    </div>
+
+    <div id="dialog-button-container">
+
+        <div>
+            <button onclick="salvarProdutos()">📁</button>
+            <button onclick="cancelarAltProduto()">❌</button>
+        </div>
+
+
+
+    </div>
+
+
+</dialog>
 
 
 
