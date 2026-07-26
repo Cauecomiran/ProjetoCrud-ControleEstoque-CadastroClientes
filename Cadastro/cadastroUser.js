@@ -18,3 +18,13 @@ function cadastrar(){
     usuarios.push(usuario)
     
 }
+
+function logar(){
+    for(let i=0; i<usuarios.length; i++){
+        if(document.getElementById('input-usuario').value == usuarios[i].user && document.getElementById('input-senha').value == usuarios[i].senha){
+            alert('Login realizado com sucesso!')
+            return
+        }
+    }
+    alert('Usuário ou senha incorretos!')
+}
