@@ -67,15 +67,13 @@
 
         <div id="container-produto">
 
-
-
         </div>
         
     </div>
 
 </div>
 
-
+<!-- // caixa de cadastro de produtos -->
 <dialog id="cadastro-produto-modal">
 
     
@@ -104,21 +102,16 @@
             <label for="input-valor-varejo">Valor varejo:</label>
             <input type="text" id="input-valor-varejo">
         </div>
-
-        <div>
-            <label for="input-id">ID:</label>
-            <input type="text" id="input-id" readonly placeholder="id:123456">
-        </div>
-
     </div>
 
     <div id="dialog-button-container">
-
+        <div>
+            <button onclick="cancelarAltProduto()">cancelar</button>
+        </div>
+        
         <div>
             <button onclick="salvarProdutos()">📁</button>
-            <button onclick="cancelarAltProduto()">❌</button>
         </div>
-
 
 
     </div>
@@ -126,23 +119,49 @@
 
 </dialog>
 
+<!-- /// caixa de ediçao de produtos -->
+<dialog id="editar-produto-modal">
 
 
-    
+    <div id="input-edicao-container">
+        <div>
+            <label for="input-edicao-nome">Nome:</label>
+            <input type="text" id="input-edicao-nome">
+        </div>
 
+        <div>
+            <label for="input-edicao-tamanho">Tamanho:</label>
+            <input type="text" id="input-edicao-tamanho">
+        </div>
 
+        <div>
+            <label for="input-edicao-custo">Custo</label>
+            <input type="text" id="input-edicao-custo">
+        </div>
 
+        <div>
+            <label for="input-edicao-valor-atacado">Valor Atacado:</label>
+            <input type="text" id="input-edicao-valor-atacado">
+        </div>
 
+        <div>
+            <label for="input-edicao-valor-vaarejo">Valor Varejo:</label>
+            <input type="text" id="input-edicao-valor-varejo">
+        </div>
 
+    <div id="botao-edicao-container">
 
+        <div>
+            <button onclick="cancelarEdicao()">cancelar</button>
+        </div>
 
+        <div>
+            <button onclick="salvarEdicao()">📁</button>
+        </div>
+        
+    </div>  
 
-
-
-
-
-
-
+</dialog>
 
 
     <script src="cadastroProduto.js"></script>
