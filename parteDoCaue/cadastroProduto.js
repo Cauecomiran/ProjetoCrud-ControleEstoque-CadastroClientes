@@ -1,4 +1,4 @@
-const produtos = [
+let produtos = [
   {
     nome: "Camiseta Oversized Presta",
     tamanho: "G",
@@ -36,24 +36,24 @@ function mostrarProdutos(){
 
     containerProduto.innerHTML = ""
 
-    produtos.forEach((prod, i) =>{
+    produtos.forEach((prod) =>{
 
         const botaoCheckBox = document.createElement("input")
         botaoCheckBox.type = "checkbox"
-        botaoCheckBox.id = "bt" + i
+        botaoCheckBox.id = "bt" + prod.id
         botaoCheckBox.className = "botao-checkbox"
-        botaoCheckBox.value = i
+        botaoCheckBox.value = prod.id
 
 
 
         const div = document.createElement("div") 
         div.className = "produto-classe"
-        div.id = "p" + i
+        div.id = "p" + prod.id
 
         const botaoEditar = document.createElement("button")
         botaoEditar.className = "botao-editar"
         botaoEditar.innerText = "✏️"
-        botaoEditar.onclick = () => { editarProduto(i)}
+        botaoEditar.onclick = () => { editarProduto(prod.id)}
 
         
 
@@ -72,7 +72,7 @@ function mostrarProdutos(){
         containerProduto.appendChild(div)
         
 
-})
+}) 
 
 }
 mostrarProdutos()
@@ -186,4 +186,48 @@ function cancelarEdicao(){
 
 // deletar produtos
 
+// function excluirProdutos(){
+//   let elementos =  document.getElementsByClassName("botao-checkbox")
+//   let produtosParaExcluir = []
 
+//   for(i=0 ; i < elementos.length ; i++){
+
+//     if(elementos[i].checked)
+
+//     produtosParaExcluir.push(elementos[i].id.replace("bt",""))
+
+//   }
+//   console.log(produtosParaExcluir)
+// }
+
+function excluirProdutos(){
+
+  let  btCheckbox = document.getElementsByClassName("botao-checkbox")
+
+  let produtosParaExcluir = []
+
+  for( i = 0; i<btCheckbox.length; i++ ){
+
+    if(btCheckbox[i].checked){
+      produtosParaExcluir.push(Number(btCheckbox[i].id.replace("bt", "")))
+    }
+
+  }
+  
+  console.log(produtosParaExcluir)
+
+
+
+  for(i = 0; i<produtosParaExcluir.length; i++){
+
+    produtos = produtos.filter(prod => prod.id !== produtosParaExcluir[i] )
+
+    // produtosParaExcluir[i]
+
+   
+
+  }
+
+  console.log(produtos)
+  mostrarProdutos()
+}
