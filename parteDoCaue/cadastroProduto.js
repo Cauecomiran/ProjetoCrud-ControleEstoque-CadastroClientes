@@ -6,7 +6,8 @@ let produtos = [
     id: 1711000000001,
     valorAtacado: "40.00",
     valorVarejo: "65.00",
-    categoria: "Vestuário"
+    categoria: "Vestuário",
+    qtd: 0
   },
   {
     nome: "Tênis Sport Runner",
@@ -15,7 +16,8 @@ let produtos = [
     id: 1711000000002,
     valorAtacado: "120.00",
     valorVarejo: "199.90",
-    categoria: "Calçados"
+    categoria: "Calçados",
+    qtd: 0
   },
   {
     nome: "Boné Aba Curva",
@@ -24,16 +26,31 @@ let produtos = [
     id: 1711000000003,
     valorAtacado: "22.00",
     valorVarejo: "45.00",
-    categoria: "Acessórios"
+    categoria: "Acessórios",
+    qtd: 0
   },
  
+];
+
+const categorias = [
+  {
+    nomeCategoria: "camiseta",
+    idCat: 1
+  },
+  {
+    nomeCategoria: "blusa",
+    idCat: 2
+  },
+  {
+    nomeCategoria: "calça",
+    idCat: 3
+  },
 ];
 
 const containerProduto = document.getElementById("container-produto")
 
 // mostrar produtos 
 function mostrarProdutos(){
-
     containerProduto.innerHTML = ""
 
     produtos.forEach((prod) =>{
@@ -43,9 +60,7 @@ function mostrarProdutos(){
         botaoCheckBox.id = "bt" + prod.id
         botaoCheckBox.className = "botao-checkbox"
         botaoCheckBox.value = prod.id
-
-
-
+//////////////////////////////////////////
         const div = document.createElement("div") 
         div.className = "produto-classe"
         div.id = "p" + prod.id
@@ -54,43 +69,121 @@ function mostrarProdutos(){
         botaoEditar.className = "botao-editar"
         botaoEditar.innerText = "✏️"
         botaoEditar.onclick = () => { editarProduto(prod.id)}
-
-        
-
-
+///////////////////////////////////////////////
         div.innerHTML =
         ` <span>
         <br> Nome: ${prod.nome} 
         <br> Tamanho: ${prod.tamanho} 
         <br> Custo: ${prod.custo} 
         <br> Valor atacado: ${prod.valorAtacado}
-        <br> Valor Varejo: ${prod.valorVarejo} 
+        <br> Valor Varejo: ${prod.valorVarejo}
+        <br> Categoria: ${prod.categoria} 
+        <br> id : ${prod.id}
         </span>`
         
         div.appendChild(botaoCheckBox)
         div.appendChild(botaoEditar)
         containerProduto.appendChild(div)
-        
-
 }) 
-
 }
 mostrarProdutos()
+
+function mostrarCategoriaFiltro(){
+
+    let selectFilto = document.getElementById("select-categoria-filtro")
+
+    categorias.forEach((cat,i) => {
+
+      const opcaoCat = document.createElement("option")
+      
+      opcaoCat.id = "opt" + i
+      opcaoCat.className = "option-classe"
+      opcaoCat.text = cat.nomeCategoria
+
+
+      selectFilto.appendChild(opcaoCat)
+    })
+    
+  }
+mostrarCategoriaFiltro()
+
+function mostrarCategoriaCadastro(){
+
+    let selectCadastro = document.getElementById("select-categoria-cadastro")
+
+    categorias.forEach((cat,i) => {
+
+      const opcaoCat = document.createElement("option")
+      
+      opcaoCat.id = "opt" + i
+      opcaoCat.className = "option-classe"
+      opcaoCat.text = cat.nomeCategoria
+
+
+      selectCadastro.appendChild(opcaoCat)
+    })
+    
+  }
+mostrarCategoriaCadastro()
+
+
+function filtrarProdutos(){
+ let filtroCategoria = document.getElementById("select-categoria-filtro")
+
+  console.log(produtos)
+
+  for(i = 0; i < produtos.length; i++){
+
+    if(produtos[i].categoria === filtroCategoria.value){
+
+        const botaoCheckBox = document.createElement("input")
+        botaoCheckBox.type = "checkbox"
+        botaoCheckBox.id = "bt" + produtos[i].id
+        botaoCheckBox.className = "botao-checkbox"
+        botaoCheckBox.value = produtos[i].id
+//////////////////////////////////////////
+        const div = document.createElement("div") 
+        div.className = "produto-classe"
+        div.id = "p" + produtos[i].id
+
+        const botaoEditar = document.createElement("button")
+        botaoEditar.className = "botao-editar"
+        botaoEditar.innerText = "✏️"
+        botaoEditar.onclick = () => { editarProduto(produtos[i].id)}
+///////////////////////////////////////////////
+        div.innerHTML =
+        ` <span>
+        <br> Nome: ${produtos[i].nome} 
+        <br> Tamanho: ${produtos[i].tamanho} 
+        <br> Custo: ${produtos[i].custo} 
+        <br> Valor atacado: ${produtos[i].valorAtacado}
+        <br> Valor Varejo: ${produtos[i].valorVarejo}
+        <br> Categoria: ${produtos[i].categoria} 
+        <br> id : ${produtos[i].id}
+        </span>`
+        
+        div.appendChild(botaoCheckBox)
+        div.appendChild(botaoEditar)
+        containerProduto.appendChild(div);
+  }
+}}
 // mostrar pordutos
+
 
 //============================================================================================
 
 // casdastrar produtos
-function cadastrarProdutos() {
-
+function abrirCadastro() {
     document.getElementById("cadastro-produto-modal").showModal()
+};
 
-
+function fecharCadastro(){
+    document.getElementById("cadastro-produto-modal").close();
 }
 
 
 // salvar produtos
-function salvarProdutos(){
+function salvarCadastro(){
     let produto = {
 
       nome: document.getElementById("input-nome").value ,
@@ -102,7 +195,7 @@ function salvarProdutos(){
       valorAtacado: document.getElementById("input-valor-atacado").value ,
       valorVarejo:  document.getElementById("input-valor-varejo").value ,
 
-      categoria: "",
+      categoria: document.getElementById("select-categoria-cadastro").value
 
     }
     produtos.push(produto)
@@ -119,26 +212,34 @@ function cancelarAddProduto(){
 
 // ==============================================================================================
 
-// edição de produtos --------->
-let idEdição = 0
-function editarProduto(id) {
-  // identificando o produto que vai ser editado
-  idEdição = id
 
-  // chamando a execução do dialog, janela suspensa/modal
+
+
+// edição de produtos --------->
+function editarProduto(idParaEdicao) {
+
+// chamando a execução do dialog, janela suspensa/modal
   document.getElementById("editar-produto-modal").showModal()
 
-  // escrevendo no input do dialog de edição, para as informações do produto aparecerem
-  document.getElementById("input-edicao-nome").value = produtos[idEdição].nome
-  document.getElementById("input-edicao-tamanho").value = produtos[idEdição].tamanho
-  document.getElementById("input-edicao-custo").value = produtos[idEdição].custo
-  document.getElementById("input-edicao-valor-atacado").value = produtos[idEdição].valorAtacado
-  document.getElementById("input-edicao-valor-varejo").value = produtos[idEdição].valorVarejo 
 
+  // identificando o produto que vai ser editado
+  produtos.forEach((produto, i) => {
+    if(idParaEdicao == produto.id ){
+  // escrevendo no input do dialog de edição, para as informações do produto aparecerem
+        document.getElementById("input-edicao-nome").value = produto.nome
+        document.getElementById("input-edicao-tamanho").value = produto.tamanho
+        document.getElementById("input-edicao-custo").value = produto.custo
+        document.getElementById("input-edicao-valor-atacado").value = produto.valorAtacado
+        document.getElementById("input-edicao-valor-varejo").value = produto.valorVarejo
+        
+        posicaoProd = i
+    }
+  })
 }
 
 // salvar edição
 function salvarEdicao(){
+
   // identificando variaveis para facilitar a escrita do codigo
   const nome = document.getElementById("input-edicao-nome")
   const tamanho = document.getElementById("input-edicao-tamanho")
@@ -155,12 +256,13 @@ function salvarEdicao(){
      {
       alert("espaços em branco")
      }else{
-      // extrai as informaçoes e manda para a variavel
-      produtos[idEdição].nome = nome.value
-      produtos[idEdição].tamanho = tamanho.value
-      produtos[idEdição].custo = custo.value
-      produtos[idEdição].valorAtacado = valorAtacado.value
-      produtos[idEdição].valorVarejo = valorVarejo.value
+      // extrai as informaçoes e manda para a variave
+      // l
+      produtos[posicaoProd].nome = nome.value
+      produtos[posicaoProd].tamanho = tamanho.value
+      produtos[posicaoProd].custo = custo.value
+      produtos[posicaoProd].valorAtacado = valorAtacado.value
+      produtos[posicaoProd].valorVarejo = valorVarejo.value
       // limpar campos para proximas edições
       nome.value = ""
       tamanho.value = ""
@@ -182,24 +284,16 @@ function cancelarEdicao(){
 }
 // edição de produtos --------->
 
+
+
+
+
 // ============================================================================
 
+
+
+
 // deletar produtos
-
-// function excluirProdutos(){
-//   let elementos =  document.getElementsByClassName("botao-checkbox")
-//   let produtosParaExcluir = []
-
-//   for(i=0 ; i < elementos.length ; i++){
-
-//     if(elementos[i].checked)
-
-//     produtosParaExcluir.push(elementos[i].id.replace("bt",""))
-
-//   }
-//   console.log(produtosParaExcluir)
-// }
-
 function excluirProdutos(){
 
   let  btCheckbox = document.getElementsByClassName("botao-checkbox")
@@ -224,10 +318,11 @@ function excluirProdutos(){
 
     // produtosParaExcluir[i]
 
-   
-
   }
 
   console.log(produtos)
   mostrarProdutos()
 }
+
+
+

@@ -47,7 +47,7 @@
     <input placeholder="buscar produtos..." id="buscar-produtos" type="text">
 
     <div id="remover-adicionar">
-        <button onclick="cadastrarProdutos()">➕</button>
+        <button onclick="abrirCadastro()">➕</button>
         <button onclick="excluirProdutos()">🗑️</button> 
     </div>
 
@@ -55,11 +55,9 @@
 <div id="cadastros">
 
     <div >
-        <p> categorias </p>
-        <select name="categorias" id="categorias">
+        <label for="categorias">Categorias</label>
+        <select name="class-categoria" id="select-categoria-filtro" onchange="filtrarProdutos()">
 
-            <option value="1">1</option>
-            <option value="2">2</option>
         </select>
     </div>
 
@@ -104,9 +102,13 @@
         </div>
         
         <div>
-            <label for="select-categoria">Categotia:</label>
-            <select name="catagoria" id="select-categoria">
-                <option value="camisetas">camisetas</option>
+            <label for="input-qtd">Quantidade:</label>
+            <input type="text" id="input-qtd">
+        </div>
+        
+        <div>
+            <label for="select-categoria-cadastro">Categoria:</label>
+            <select name="catagoria" id="select-categoria-cadastro">
                 
             </select>
         </div>
@@ -114,11 +116,11 @@
 
     <div id="dialog-button-container">
         <div>
-            <button onclick="cancelarAltProduto()">cancelar</button>
+            <button onclick="fecharCadastro()">cancelar</button>
         </div>
         
         <div>
-            <button onclick="salvarProdutos()">📁</button>
+            <button onclick="salvarCadastro()">📁</button>
         </div>
 
     
