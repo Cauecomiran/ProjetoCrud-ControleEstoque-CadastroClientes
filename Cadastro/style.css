@@ -1,0 +1,68 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    /* Cores de Fundo */
+  --bg-primary: #121214;
+  --bg-card: #202024;
+  
+  /* Cores de Destaque (Ação Principal) */
+  --accent-primary: #E5B800;
+  --accent-hover: #FFC700;
+  
+  /* Cores de Texto */
+  --text-main: #EDEDED;
+  --text-secondary: #A8A8B3;
+  
+  /* Utilitários */
+  --border-color: #323238;
+  --error-color: #F75A68;
+}
+
+body{
+    background-color: var(--bg-primary);
+}
+
+section{
+    background-color: var(--bg-card);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 4px 6px rgba(228, 225, 225, 0.863);
+}
+
+h1{
+    color: var(--text-main);
+    text-align: center;
+}
+
+#div-login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 60vh;
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(228, 225, 225, 0.863);
+    color: var(--text-main);
+    background-color: var(--bg-card);
+}
+
+button{
+    background-color: var(--accent-primary);
+    color: var(--text-main);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 250ms;
+    gap: 10px;
+    margin: 3px;
+}
