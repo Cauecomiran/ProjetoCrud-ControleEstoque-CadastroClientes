@@ -83,3 +83,6 @@ dialog{
     background-color: var(--bg-card);
 }
 
+p{
+    color: blue;
+}
