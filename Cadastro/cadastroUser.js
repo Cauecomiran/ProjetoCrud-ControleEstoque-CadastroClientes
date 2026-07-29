@@ -16,7 +16,7 @@ function cadastrar(){
         senha: document.getElementById('input-novaSenha').value,
     }
     usuarios.push(usuario)
-    
+    salvarUsuario()
 }
 
 function logar(){
@@ -27,4 +27,9 @@ function logar(){
         }
     }
     alert('Usuário ou senha incorretos!')
+}
+
+function salvarUsuario(){
+  localStorage.setItem('Usuários',JSON.stringify(usuarios))
+
 }
