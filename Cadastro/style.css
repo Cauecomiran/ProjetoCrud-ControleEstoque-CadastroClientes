@@ -66,3 +66,20 @@ button{
     gap: 10px;
     margin: 3px;
 }
+
+dialog{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 60vh;
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 4px 6px rgba(228, 225, 225, 0.863);
+    color: var(--text-main);
+    background-color: var(--bg-card);
+}
+
