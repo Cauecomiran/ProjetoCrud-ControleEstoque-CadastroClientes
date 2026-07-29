@@ -131,6 +131,8 @@ function filtrarProdutos(){
  let filtroCategoria = document.getElementById("select-categoria-filtro")
 
   console.log(produtos)
+  
+  containerProduto.innerHTML = ""
 
   for(i = 0; i < produtos.length; i++){
 
@@ -326,3 +328,7 @@ function excluirProdutos(){
 
 
 
+function addCat(){
+  document.getElementById("addCategoria").showModal()
+  
+}

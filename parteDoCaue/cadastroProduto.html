@@ -57,24 +57,18 @@
     <div >
         <label for="categorias">Categorias</label>
         <select name="class-categoria" id="select-categoria-filtro" onchange="filtrarProdutos()">
-
         </select>
+        <button onclick="addCat()">+</button>
     </div>
-
+    
     <div id="produtos">
-
-        <div id="container-produto">
-
-        </div>
-        
+        <div id="container-produto">  </div>
     </div>
-
 </div>
 
 <!-- // caixa de cadastro de produtos -->
 <dialog id="cadastro-produto-modal">
 
-    
     <div id="dialog-input-container">
         <div>
             <label for="input-nome">Nome:</label>
@@ -122,9 +116,6 @@
         <div>
             <button onclick="salvarCadastro()">📁</button>
         </div>
-
-    
-
     </div>
 
 
@@ -174,6 +165,14 @@
 
 </dialog>
 
+<dialog id="addCategoria">
+    
+    
+    <h2>Nova categoria:</h2>
+    <label for="input-categoria-modal">Categoria:</label>
+    <input type="text" id="input-categoria-modal" placeholder="digite aqui..." />
+    
+</dialog>
 
     <script src="cadastroProduto.js"></script>
 </body>
