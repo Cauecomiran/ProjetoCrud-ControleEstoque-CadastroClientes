@@ -57,7 +57,7 @@ h1{
 
 button{
     background-color: var(--accent-primary);
-    color: var(--text-main);
+    color: #121214;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;

@@ -33,3 +33,47 @@ function salvarUsuario(){
   localStorage.setItem('Usuários',JSON.stringify(usuarios))
 
 }
+
+function carregarDados(){
+    
+}
+
+function testes(){
+    usuarios = [
+  {
+    id: 1785072358251,
+    user: 'José',
+    email: 'jose_reidelas67@gmail.com',
+    telefone: '57 4788-8686',
+    senha: 'cOxinha123',
+  },
+  {
+    id: 1785072358252,
+    user: 'Maria',
+    email: 'maria.silva@gmail.com',
+    telefone: '11 98765-4321',
+    senha: 'm@riaSenha!45',
+  },
+  {
+    id: 1785072358253,
+    user: 'Lucas',
+    email: 'lucas_dev@outlook.com',
+    telefone: '21 99887-1122',
+    senha: 'L3monCake#2024',
+  },
+  {
+    id: 1785072358254,
+    user: 'Ana',
+    email: 'ana.costa@yahoo.com',
+    telefone: '31 97654-3210',
+    senha: 'aNa_pass99',
+  },
+  {
+    id: 1785072358255,
+    user: 'Carlos',
+    email: 'carlos.eduardo@hotmail.com',
+    telefone: '41 98811-2233',
+    senha: 'P@sswordCarlos',
+  },
+];
+}
