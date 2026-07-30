@@ -32,20 +32,11 @@
 
 
 <div id="banner">
-
-    <img src="" alt="imagem vai ficar aqui">
-
-    <div>
-
-        <button> adicionar produtos</button>
-
-    </div>
-
+    <img src="banner.png" alt="imagem vai ficar aqui">
 </div>
 
-<div>
-    <input placeholder="buscar produtos..." id="buscar-produtos" type="text">
 
+<div>
     <div id="remover-adicionar">
         <button onclick="abrirCadastro()">➕</button>
         <button onclick="excluirProdutos()">🗑️</button> 
@@ -54,11 +45,11 @@
 </div>
 <div id="cadastros">
 
-    <div >
+    <div id="categoria-div">
         <label for="categorias">Categorias</label>
         <select name="class-categoria" id="select-categoria-filtro" onchange="filtrarProdutos()">
         </select>
-        <button onclick="addCat()">+</button>
+        <button onclick="abrirCadastroCat()">+</button>
     </div>
     
     <div id="produtos">
@@ -66,42 +57,58 @@
     </div>
 </div>
 
+<div id="cadastroCategoria">
+    
+    <h2>Categorias:</h2>
+    <div>
+        <button onclick="excluirCategoria()">🗑️</button>
+    </div>
+
+    <div id="container-categoria">
+
+
+    </div>
+</div>
+
+
+
+
 <!-- // caixa de cadastro de produtos -->
 <dialog id="cadastro-produto-modal">
 
     <div id="dialog-input-container">
         <div>
-            <label for="input-nome">Nome:</label>
+            <label for="input-nome">Nome:</label> <br>
             <input type="text" id="input-nome">    
         </div>
 
         <div>
-            <label for="input-tamanho">Tamanho:</label>
+            <label for="input-tamanho">Tamanho:</label> <br>
             <input type="text" id="input-tamanho">
         </div>
 
         <div>
-            <label for="input-custo">Custo:</label>
-            <input type="text" id="input-custo">
+            <label for="input-custo">Custo:</label> <br>
+            <input type="number" id="input-custo">
         </div>
 
         <div>
-            <label for="input-valor-atacado">Valor atacado:</label>
-            <input type="text" id="input-valor-atacado">
+            <label for="input-valor-atacado">Valor atacado:</label> <br>
+            <input type="number" id="input-valor-atacado">
         </div>
 
         <div>
-            <label for="input-valor-varejo">Valor varejo:</label>
-            <input type="text" id="input-valor-varejo">
+            <label for="input-valor-varejo">Valor varejo:</label> <br>
+            <input type="number" id="input-valor-varejo">
         </div>
         
         <div>
-            <label for="input-qtd">Quantidade:</label>
-            <input type="text" id="input-qtd">
+            <label for="input-qtd">Quantidade:</label> <br>
+            <input type="number" id="input-qtd">
         </div>
         
         <div>
-            <label for="select-categoria-cadastro">Categoria:</label>
+            <label for="select-categoria-cadastro">Categoria:</label> 
             <select name="catagoria" id="select-categoria-cadastro">
                 
             </select>
@@ -110,11 +117,11 @@
 
     <div id="dialog-button-container">
         <div>
-            <button onclick="fecharCadastro()">cancelar</button>
+            <button class="cancelar" onclick="fecharCadastro()">❌</button>
         </div>
         
         <div>
-            <button onclick="salvarCadastro()">📁</button>
+            <button class="salvar" onclick="salvarCadastro()">✅</button>
         </div>
     </div>
 
@@ -127,38 +134,42 @@
 
     <div id="input-edicao-container">
         <div>
-            <label for="input-edicao-nome">Nome:</label>
+            <label for="input-edicao-nome">Nome:</label> <br>
             <input type="text" id="input-edicao-nome">
         </div>
 
         <div>
-            <label for="input-edicao-tamanho">Tamanho:</label>
+            <label for="input-edicao-tamanho">Tamanho:</label> <br>
             <input type="text" id="input-edicao-tamanho">
         </div>
 
         <div>
-            <label for="input-edicao-custo">Custo</label>
-            <input type="text" id="input-edicao-custo">
+            <label for="input-edicao-custo">Custo</label><br>
+            <input type="number" id="input-edicao-custo">
         </div>
 
         <div>
-            <label for="input-edicao-valor-atacado">Valor Atacado:</label>
-            <input type="text" id="input-edicao-valor-atacado">
+            <label for="input-edicao-valor-atacado">Valor Atacado:</label><br>
+            <input type="number" id="input-edicao-valor-atacado">
         </div>
 
         <div>
-            <label for="input-edicao-valor-vaarejo">Valor Varejo:</label>
-            <input type="text" id="input-edicao-valor-varejo">
+            <label for="input-edicao-valor-vaarejo">Valor Varejo:</label><br>
+            <input type="number" id="input-edicao-valor-varejo">
         </div>
 
+        <div>
+            <label for="input-edicao-qtd">Quantidade:</label><br>
+            <input type="number"  id="input-edicao-qtd">
+        </div>
     <div id="botao-edicao-container">
 
         <div>
-            <button onclick="cancelarEdicao()">cancelar</button>
+            <button class="cancelar" onclick="cancelarEdicao()">❌</button>
         </div>
 
         <div>
-            <button onclick="salvarEdicao()">📁</button>
+            <button class="salvar" onclick="salvarEdicao()">✅</button>
         </div>
         
     </div>  
@@ -166,12 +177,39 @@
 </dialog>
 
 <dialog id="addCategoria">
-    
-    
+
     <h2>Nova categoria:</h2>
-    <label for="input-categoria-modal">Categoria:</label>
-    <input type="text" id="input-categoria-modal" placeholder="digite aqui..." />
     
+    <div id="container-categorias">
+        
+        <div>
+            <label for="input-categoria-modal">Categoria:</label>
+            <input type="text" id="input-categoria-modal" placeholder="digite aqui..." />           
+        </div>
+
+        <div class="botao-categoria-container">
+            <button class="cancelar" onclick="cancelarCadastroCat()">❌</button>
+            <button class="salvar" onclick="salvarCadastroCat()">✅</button>
+        </div>
+
+
+    </div>
+
+    
+</dialog>
+
+<dialog id="editar-categoria-modal">
+
+    <div>
+        <label for="editar-categoria-input">Categoria:</label>
+        <input type="text" id="editar-categoria-input">
+    </div>
+
+    <div class="botao-categoria-container">
+        <button class="cancelar" onclick="cancelarEdicaoCat()">❌</button>
+        <button class="salvar" onclick="salvarEdicaoCat()">✅</button>
+    </div>
+
 </dialog>
 
     <script src="cadastroProduto.js"></script>
