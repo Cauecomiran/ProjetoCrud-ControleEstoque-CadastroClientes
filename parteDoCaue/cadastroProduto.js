@@ -1,55 +1,10 @@
-let produtos = [
-  {
-    nome: "Camiseta Oversized Presta",
-    tamanho: "G",
-    custo: "25.00",
-    id: 1711000000001,
-    valorAtacado: "40.00",
-    valorVarejo: "65.00",
-    categoria: "Vestuário",
-    qtd: 0
-  },
-  {
-    nome: "Tênis Sport Runner",
-    tamanho: "41",
-    custo: "80.00",
-    id: 1711000000002,
-    valorAtacado: "120.00",
-    valorVarejo: "199.90",
-    categoria: "Calçados",
-    qtd: 0
-  },
-  {
-    nome: "Boné Aba Curva",
-    tamanho: "Único",
-    custo: "12.50",
-    id: 1711000000003,
-    valorAtacado: "22.00",
-    valorVarejo: "45.00",
-    categoria: "Acessórios",
-    qtd: 0
-  },
- 
-];
+let produtos = []
 
-const categorias = [
-  {
-    nomeCategoria: "camiseta",
-    idCat: 1
-  },
-  {
-    nomeCategoria: "blusa",
-    idCat: 2
-  },
-  {
-    nomeCategoria: "calça",
-    idCat: 3
-  },
-];
+let categorias = []
+
+////
 
 const containerProduto = document.getElementById("container-produto")
-
-// mostrar produtos 
 function mostrarProdutos(){
     containerProduto.innerHTML = ""
 
@@ -78,7 +33,7 @@ function mostrarProdutos(){
         <br> Valor atacado: ${prod.valorAtacado}
         <br> Valor Varejo: ${prod.valorVarejo}
         <br> Categoria: ${prod.categoria} 
-        <br> id : ${prod.id}
+        <br> Quantidade : ${prod.qtd}
         </span>`
         
         div.appendChild(botaoCheckBox)
@@ -86,11 +41,228 @@ function mostrarProdutos(){
         containerProduto.appendChild(div)
 }) 
 }
-mostrarProdutos()
+/////
+function abrirCadastro() {
+    document.getElementById("cadastro-produto-modal").showModal()
+};
+////
+function fecharCadastro(){
+    document.getElementById("cadastro-produto-modal").close();
+}
+////
+function salvarCadastro(){
+carregarDados()
+  if(document.getElementById("input-nome").value  == ''||
+    document.getElementById("input-tamanho").value == ''||
+    document.getElementById("input-custo").value == ''||
+    document.getElementById("input-valor-atacado").value == ''||
+    document.getElementById("input-valor-varejo").value == ''||
+    document.getElementById("select-categoria-cadastro").value == ''||
+    document.getElementById("input-qtd").value == ''){
 
+      alert("espaços em branco!!!")
+
+    }else{
+    let produto = {
+
+      nome: document.getElementById("input-nome").value ,
+      tamanho: document.getElementById("input-tamanho").value ,
+      custo: document.getElementById("input-custo").value ,
+
+      id: Date.now(), 
+      
+      valorAtacado: document.getElementById("input-valor-atacado").value ,
+      valorVarejo:  document.getElementById("input-valor-varejo").value ,
+
+      categoria: document.getElementById("select-categoria-cadastro").value,
+
+      qtd: document.getElementById("input-qtd").value
+
+    }
+    produtos.push(produto)
+    
+    document.getElementById("input-nome").value  = ''
+    document.getElementById("input-tamanho").value = ''
+    document.getElementById("input-custo").value = ''
+    document.getElementById("input-valor-atacado").value = ''
+    document.getElementById("input-valor-varejo").value = ''
+    document.getElementById("select-categoria-cadastro").value = ''
+    document.getElementById("input-qtd").value = ''
+
+    document.getElementById("cadastro-produto-modal").close()
+
+  atualizarTela()
+salvarDados()
+  }
+}
+////
+function cancelarAddProduto(){
+    document.getElementById("cadastro-produto-modal").close()
+}
+//////
+function editarProduto(idParaEdicao) {
+  carregarDados()
+
+// chamando a execução do dialog, janela suspensa/modal
+  document.getElementById("editar-produto-modal").showModal()
+
+
+  // identificando o produto que vai ser editado
+  produtos.forEach((produto, i) => {
+    if(idParaEdicao == produto.id ){
+  // escrevendo no input do dialog de edição, para as informações do produto aparecerem
+        document.getElementById("input-edicao-nome").value = produto.nome
+        document.getElementById("input-edicao-tamanho").value = produto.tamanho
+        document.getElementById("input-edicao-custo").value = produto.custo
+        document.getElementById("input-edicao-valor-atacado").value = produto.valorAtacado
+        document.getElementById("input-edicao-valor-varejo").value = produto.valorVarejo
+        document.getElementById("input-edicao-qtd").value = produto.qtd
+        
+        posicaoProd = i
+    }
+  })
+  atualizarTela()
+  salvarDados()
+}
+//////
+function salvarEdicao(){
+  carregarDados()
+
+  // identificando variaveis para facilitar a escrita do codigo
+  const nome = document.getElementById("input-edicao-nome")
+  const tamanho = document.getElementById("input-edicao-tamanho")
+  const custo = document.getElementById("input-edicao-custo")
+  const valorAtacado = document.getElementById("input-edicao-valor-atacado")
+  const valorVarejo = document.getElementById("input-edicao-valor-varejo")
+  const qtd = document.getElementById("input-edicao-qtd")
+
+  // if para extrair informações dos inputs ou retornar um prompt que avisa sobre espaços em branco
+  if(nome.value === "" || 
+     tamanho.value === "" ||
+     custo.value === "" || 
+     valorAtacado.value === "" || 
+     valorVarejo.value === "")
+     {
+      alert("espaços em branco")
+     }else{
+      // extrai as informaçoes e manda para a variave
+      // l
+      produtos[posicaoProd].nome = nome.value
+      produtos[posicaoProd].tamanho = tamanho.value
+      produtos[posicaoProd].custo = custo.value
+      produtos[posicaoProd].valorAtacado = valorAtacado.value
+      produtos[posicaoProd].valorVarejo = valorVarejo.value
+      produtos[posicaoProd].valorVarejo = qtd.value
+      // limpar campos para proximas edições
+      nome.value = ""
+      tamanho.value = ""
+      custo.value = ""
+      valorAtacado.value = ""
+      valorVarejo.value = ""
+      qtd.value = ""
+       
+      // atualizar infrmações na tela
+        document.getElementById("editar-produto-modal").close()
+        atualizarTela()
+     }
+     salvarDados()
+     }
+/////
+function cancelarEdicao(){
+
+// fecha o modal/janela suspensa
+  document.getElementById("editar-produto-modal").close();
+}
+/////
+function excluirProdutos(){
+carregarDados()
+  let  btCheckbox = document.getElementsByClassName("botao-checkbox")
+
+  let produtosParaExcluir = []
+
+  for( let i = 0; i<btCheckbox.length; i++ ){
+
+    if(btCheckbox[i].checked){
+      produtosParaExcluir.push(Number(btCheckbox[i].id.replace("bt", "")))
+    }
+
+  }
+  
+  console.log(produtosParaExcluir)
+
+
+
+  for( let i = 0; i<produtosParaExcluir.length; i++){
+
+    produtos = produtos.filter(prod => prod.id !== produtosParaExcluir[i] )
+
+    // produtosParaExcluir[i]
+
+  }
+
+  console.log(produtos)
+  atualizarTela()
+salvarDados()
+}
+/////
+function abrirCadastroCat(){
+  document.getElementById("addCategoria").showModal()
+}
+
+function cancelarCadastroCat(){
+  document.getElementById("addCategoria").close()
+}
+
+function salvarCadastroCat(){
+carregarDados()
+  let cat = {
+   nomeCategoria: document.getElementById("input-categoria-modal").value,
+   idCat: Date.now() / 10 }
+
+    categorias.push(cat)
+
+    document.getElementById("input-categoria-modal").value = ''
+    document.getElementById("addCategoria").close()
+    atualizarTela()
+salvarDados()
+}
+
+/////
+const containerCategoria = document.getElementById("container-categoria")
+function mostrarCategorias(){
+containerCategoria.innerHTML = ""
+  categorias.forEach(cat => {
+
+  const categoriaCheckBox = document.createElement("input")
+  categoriaCheckBox.type = "checkbox"
+  categoriaCheckBox.id = "bt" + cat.idCat
+  categoriaCheckBox.className = "categoria-checkBox"
+  categoriaCheckBox.value = cat.idCat
+
+  const editarCategoria = document.createElement("button")
+  editarCategoria.className = "categoriaEditar"
+  editarCategoria.innerText = "✏️"
+  editarCategoria.onclick = () => { botaoEditarCategoria(cat.idCat)}
+  
+
+  const div = document.createElement("div")
+  div.id = "cat" + cat.idCat
+  div.className = "categoria-class"
+  div.innerHTML = `<span> Categoria: ${cat.nomeCategoria}`
+
+  div.appendChild(editarCategoria)
+  div.appendChild(categoriaCheckBox)
+  containerCategoria.appendChild(div)
+})
+}
+
+/////
 function mostrarCategoriaFiltro(){
 
     let selectFilto = document.getElementById("select-categoria-filtro")
+
+    selectFilto.innerText =""
+    selectFilto.innerHTML =""
 
     categorias.forEach((cat,i) => {
 
@@ -105,8 +277,7 @@ function mostrarCategoriaFiltro(){
     })
     
   }
-mostrarCategoriaFiltro()
-
+/////
 function mostrarCategoriaCadastro(){
 
     let selectCadastro = document.getElementById("select-categoria-cadastro")
@@ -124,9 +295,7 @@ function mostrarCategoriaCadastro(){
     })
     
   }
-mostrarCategoriaCadastro()
-
-
+////
 function filtrarProdutos(){
  let filtroCategoria = document.getElementById("select-categoria-filtro")
 
@@ -168,167 +337,106 @@ function filtrarProdutos(){
         div.appendChild(botaoEditar)
         containerProduto.appendChild(div);
   }
-}}
-// mostrar pordutos
-
-
-//============================================================================================
-
-// casdastrar produtos
-function abrirCadastro() {
-    document.getElementById("cadastro-produto-modal").showModal()
-};
-
-function fecharCadastro(){
-    document.getElementById("cadastro-produto-modal").close();
 }
+}
+////
+let indiceEditar
+function botaoEditarCategoria(idParaEditar){
 
+    categorias.forEach((cat,i) => {
 
-// salvar produtos
-function salvarCadastro(){
-    let produto = {
-
-      nome: document.getElementById("input-nome").value ,
-      tamanho: document.getElementById("input-tamanho").value ,
-      custo: document.getElementById("input-custo").value ,
-
-      id: Date.now(), 
-      
-      valorAtacado: document.getElementById("input-valor-atacado").value ,
-      valorVarejo:  document.getElementById("input-valor-varejo").value ,
-
-      categoria: document.getElementById("select-categoria-cadastro").value
-
+    if(idParaEditar === cat.idCat){
+      document.getElementById("editar-categoria-input").value = cat.nomeCategoria
+      indiceEditar = i 
     }
-    produtos.push(produto)
-    mostrarProdutos()
 
-    document.getElementById("cadastro-produto-modal").close()
-}
-
-// cancelar aterações
-function cancelarAddProduto(){
-    document.getElementById("cadastro-produto-modal").close()
-}
-// cadastrar produtos
-
-// ==============================================================================================
-
-
-
-
-// edição de produtos --------->
-function editarProduto(idParaEdicao) {
-
-// chamando a execução do dialog, janela suspensa/modal
-  document.getElementById("editar-produto-modal").showModal()
-
-
-  // identificando o produto que vai ser editado
-  produtos.forEach((produto, i) => {
-    if(idParaEdicao == produto.id ){
-  // escrevendo no input do dialog de edição, para as informações do produto aparecerem
-        document.getElementById("input-edicao-nome").value = produto.nome
-        document.getElementById("input-edicao-tamanho").value = produto.tamanho
-        document.getElementById("input-edicao-custo").value = produto.custo
-        document.getElementById("input-edicao-valor-atacado").value = produto.valorAtacado
-        document.getElementById("input-edicao-valor-varejo").value = produto.valorVarejo
-        
-        posicaoProd = i
-    }
   })
+
+  document.getElementById("editar-categoria-modal").showModal()
+  atualizarTela()
 }
+////
+function salvarEdicaoCat(){
+  carregarDados()
 
-// salvar edição
-function salvarEdicao(){
+  produtos.forEach(prod => {
 
-  // identificando variaveis para facilitar a escrita do codigo
-  const nome = document.getElementById("input-edicao-nome")
-  const tamanho = document.getElementById("input-edicao-tamanho")
-  const custo = document.getElementById("input-edicao-custo")
-  const valorAtacado = document.getElementById("input-edicao-valor-atacado")
-  const valorVarejo = document.getElementById("input-edicao-valor-varejo")
+    if(prod.categoria === categorias[indiceEditar].nomeCategoria){
+      prod.categoria = document.getElementById("editar-categoria-input").value
+    }
 
-  // if para extrair informações dos inputs ou retornar um prompt que avisa sobre espaços em branco
-  if(nome.value === "" || 
-     tamanho.value === "" ||
-     custo.value === "" || 
-     valorAtacado.value === "" || 
-     valorVarejo.value === "")
-     {
-      alert("espaços em branco")
-     }else{
-      // extrai as informaçoes e manda para a variave
-      // l
-      produtos[posicaoProd].nome = nome.value
-      produtos[posicaoProd].tamanho = tamanho.value
-      produtos[posicaoProd].custo = custo.value
-      produtos[posicaoProd].valorAtacado = valorAtacado.value
-      produtos[posicaoProd].valorVarejo = valorVarejo.value
-      // limpar campos para proximas edições
-      nome.value = ""
-      tamanho.value = ""
-      custo.value = ""
-      valorAtacado.value = ""
-      valorVarejo.value = ""
-       
-      // atualizar infrmações na tela
-        document.getElementById("editar-produto-modal").close()
-        mostrarProdutos()
-     }
-     }
 
-// cancelar ediçao
-function cancelarEdicao(){
+  })
 
-// fecha o modal/janela suspensa
-  document.getElementById("editar-produto-modal").close();
+  categorias[indiceEditar].nomeCategoria = document.getElementById("editar-categoria-input").value
+
+
+
+  document.getElementById("editar-categoria-modal").close()
+  atualizarTela()
+salvarDados()
 }
-// edição de produtos --------->
+////
+function cancelarEdicaoCat(){
+  document.getElementById("editar-categoria-modal").close()
+}
+//////
+function excluirCategoria(){
+carregarDados()
+  let btCheckbox = document.getElementsByClassName("categoria-checkBox")
 
+  let categoriasParaExcluir = []
 
-
-
-
-// ============================================================================
-
-
-
-
-// deletar produtos
-function excluirProdutos(){
-
-  let  btCheckbox = document.getElementsByClassName("botao-checkbox")
-
-  let produtosParaExcluir = []
-
-  for( i = 0; i<btCheckbox.length; i++ ){
+  for( let i = 0; i<btCheckbox.length; i++ ){
 
     if(btCheckbox[i].checked){
-      produtosParaExcluir.push(Number(btCheckbox[i].id.replace("bt", "")))
+      
+      categoriasParaExcluir.push(Number(btCheckbox[i].id.replace("bt", "")))
     }
 
   }
   
-  console.log(produtosParaExcluir)
+  console.log(categoriasParaExcluir)
 
 
-
-  for(i = 0; i<produtosParaExcluir.length; i++){
-
-    produtos = produtos.filter(prod => prod.id !== produtosParaExcluir[i] )
-
-    // produtosParaExcluir[i]
-
+  for( let i = 0; i<categoriasParaExcluir.length; i++){
+    categorias = categorias.filter(cat => Number(cat.idCat) !== categoriasParaExcluir[i])
   }
 
-  console.log(produtos)
-  mostrarProdutos()
+  produtos.forEach( prod => {
+
+    categorias.forEach(cat =>{
+
+      if(cat.nomeCategoria === prod.categoria){
+      
+      }else{
+        prod.categoria = ""
+      }
+    })
+
+  })
+atualizarTela()
+salvarDados()
 }
 
 
+function atualizarTela(){
+  mostrarProdutos()
+  mostrarCategoriaCadastro()
+  mostrarCategoriaFiltro()
+  mostrarCategorias()
+}
 
-function addCat(){
-  document.getElementById("addCategoria").showModal()
-  
+carregarDados()
+atualizarTela()
+
+
+function salvarDados(){
+  localStorage.setItem("produtos", JSON.stringify(produtos));
+  localStorage.setItem("categorias", JSON.stringify(categorias));
+}
+
+function carregarDados(){
+  produtos = JSON.parse(localStorage.getItem("produtos")) || []
+  categorias = JSON.parse(localStorage.getItem("categorias")) || []
 }
